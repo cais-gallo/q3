@@ -1,27 +1,27 @@
 /* ============================================
-   LoveAura - Nav Template (injected by nav.js)
+   Para mi Coneja - Navegación (nav.js)
    ============================================ */
 
 const NAV_HTML = `
 <nav class="navbar">
   <a href="index.html" class="navbar-logo">
-    <span>💖</span> LoveAura
+    <span>🐰</span> Coneja
   </a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="gallery.html">Gallery</a></li>
-    <li><a href="quiz.html">Love Quiz</a></li>
-    <li><a href="love.html">Generator</a></li>
-    <li><a href="calculator.html">Calculator</a></li>
-    <li><a href="memory.html">Memories</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="secret.html">🔐 Secret</a></li>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="about.html">Sobre Nosotros</a></li>
+    <li><a href="gallery.html">Galería</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+    <li><a href="love.html">Generador</a></li>
+    <li><a href="calculator.html">Calculadora</a></li>
+    <li><a href="memory.html">Recuerdos</a></li>
+    <li><a href="contact.html">Para mi Coneja</a></li>
+    <li><a href="secret.html">🔐 Secreto</a></li>
   </ul>
   <div class="nav-right">
-    <button class="dark-toggle" title="Toggle Dark Mode">🌙</button>
-    <button class="music-btn" id="music-btn" title="Play Music">🎵</button>
-    <button class="hamburger" aria-label="Menu">
+    <button class="dark-toggle" title="Cambiar tema">🌙</button>
+    <button class="music-btn" id="music-btn" title="Reproducir música">🎵</button>
+    <button class="hamburger" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -29,7 +29,7 @@ const NAV_HTML = `
 <div id="hearts-bg"></div>
 `;
 
-// Inject nav into every page
+// Inyectar la navegación en cada página
 document.addEventListener('DOMContentLoaded', () => {
   const placeholder = document.getElementById('nav-placeholder');
   if (placeholder) placeholder.outerHTML = NAV_HTML;
