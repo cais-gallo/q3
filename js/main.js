@@ -1,14 +1,14 @@
 /* ============================================
-   LoveAura - Main JavaScript
-   Author: Created with ❤️ by Shubham
+   Para mi Coneja - JavaScript Principal
+   Hecho con ❤️ para Yaz
    ============================================ */
 
 // =============================================
-// DARK MODE TOGGLE
+// MODO OSCURO / CLARO
 // =============================================
 function initDarkMode() {
   const toggles = document.querySelectorAll('.dark-toggle');
-  const isDark = localStorage.getItem('loveaura_dark') === 'true';
+  const isDark = localStorage.getItem('conejita_dark') === 'true';
   if (isDark) document.body.classList.add('dark-mode');
 
   toggles.forEach(btn => {
@@ -16,14 +16,14 @@ function initDarkMode() {
     btn.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
       const dark = document.body.classList.contains('dark-mode');
-      localStorage.setItem('loveaura_dark', dark);
+      localStorage.setItem('conejita_dark', dark);
       toggles.forEach(b => b.textContent = dark ? '☀️' : '🌙');
     });
   });
 }
 
 // =============================================
-// HAMBURGER MENU
+// MENÚ HAMBURGUESA
 // =============================================
 function initHamburger() {
   const ham = document.querySelector('.hamburger');
@@ -32,18 +32,17 @@ function initHamburger() {
 
   ham.addEventListener('click', () => {
     navLinks.classList.toggle('open');
-    const spans = ham.querySelectorAll('span');
     ham.classList.toggle('active');
   });
 
-  // Close on link click
+  // Cerrar al hacer clic en un enlace
   navLinks.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => navLinks.classList.remove('open'));
   });
 }
 
 // =============================================
-// HIGHLIGHT ACTIVE NAV LINK
+// RESALTAR ENLACE ACTIVO
 // =============================================
 function highlightNav() {
   const page = window.location.pathname.split('/').pop() || 'index.html';
@@ -53,13 +52,13 @@ function highlightNav() {
 }
 
 // =============================================
-// FLOATING HEARTS BACKGROUND
+// CORAZONES FLOTANTES DE FONDO
 // =============================================
 function initHeartsBackground() {
   const container = document.getElementById('hearts-bg');
   if (!container) return;
 
-  const symbols = ['❤️', '💕', '💖', '💗', '💓', '💞', '💝', '🌹', '✨'];
+  const symbols = ['❤️', '💕', '💖', '💗', '💓', '💞', '💝', '🌹', '✨', '🐰'];
   let count = 0;
 
   function spawnHeart() {
@@ -83,32 +82,31 @@ function initHeartsBackground() {
     container.appendChild(heart);
     count++;
 
-    // Recycle
+    // Reciclar
     setTimeout(() => {
       heart.remove();
       count--;
     }, (duration + delay) * 1000);
   }
 
-  // Spawn hearts periodically
+  // Generar corazones periódicamente
   setInterval(spawnHeart, 600);
-  // Initial batch
+  // Lote inicial
   for (let i = 0; i < 10; i++) spawnHeart();
 }
 
 // =============================================
-// BACKGROUND MUSIC
+// MÚSICA DE FONDO
 // =============================================
 function initMusic() {
   const btn = document.getElementById('music-btn');
   if (!btn) return;
 
-  // Create audio context for gentle piano-like tones using Web Audio API
   let audioCtx = null;
   let isPlaying = false;
   let intervalId = null;
 
-  // Simple melody notes (frequencies in Hz)
+  // Melodía suave (frecuencias en Hz)
   const melody = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
 
   function playNote(freq, when, duration) {
@@ -132,7 +130,6 @@ function initMusic() {
     intervalId = setInterval(() => {
       if (!isPlaying) return;
       const now = audioCtx.currentTime;
-      // Play a note + harmony
       playNote(melody[noteIndex % melody.length], now, 1.2);
       playNote(melody[noteIndex % melody.length] * 1.5, now, 1.0);
       noteIndex++;
@@ -144,19 +141,19 @@ function initMusic() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       isPlaying = true;
       btn.textContent = '⏸';
-      btn.title = 'Pause Music';
+      btn.title = 'Pausar música';
       playMelody();
     } else {
       isPlaying = false;
       btn.textContent = '🎵';
-      btn.title = 'Play Music';
+      btn.title = 'Reproducir música';
       clearInterval(intervalId);
     }
   });
 }
 
 // =============================================
-// CUSTOM AOS (Animate On Scroll)
+// AOS PERSONALIZADO (Animar al hacer scroll)
 // =============================================
 function initAOS() {
   const elements = document.querySelectorAll('[data-aos]');
@@ -174,7 +171,7 @@ function initAOS() {
 }
 
 // =============================================
-// SMOOTH SCROLL
+// SCROLL SUAVE
 // =============================================
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -190,7 +187,7 @@ function initSmoothScroll() {
 }
 
 // =============================================
-// NAVBAR SCROLL EFFECT
+// EFECTO DE SCROLL EN LA NAVBAR
 // =============================================
 function initNavbarScroll() {
   const navbar = document.querySelector('.navbar');
@@ -205,7 +202,7 @@ function initNavbarScroll() {
 }
 
 // =============================================
-// COPY TO CLIPBOARD UTILITY
+// UTILIDAD: COPIAR AL PORTAPAPELES
 // =============================================
 function copyToClipboard(text) {
   if (navigator.clipboard) {
@@ -220,7 +217,7 @@ function copyToClipboard(text) {
   }
 }
 
-function showCopyToast(msg = '💕 Copied to clipboard!') {
+function showCopyToast(msg = '💕 ¡Copiado al portapapeles!') {
   let toast = document.querySelector('.copy-toast');
   if (!toast) {
     toast = document.createElement('div');
@@ -233,7 +230,7 @@ function showCopyToast(msg = '💕 Copied to clipboard!') {
 }
 
 // =============================================
-// INIT ALL
+// INICIALIZAR TODO
 // =============================================
 document.addEventListener('DOMContentLoaded', () => {
   initDarkMode();
