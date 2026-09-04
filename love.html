@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de Amor – LoveAura</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <h1 data-aos="fade-down">Generador de Amor 💬</h1>
+    <p data-aos="fade-up" data-aos-delay="200">Mensajes bonitos, frases románticas y más para mi Coneja 💕</p>
+  </div>
+
+  <section class="generator-section">
+
+    <div class="generator-card" data-aos="zoom-in">
+      <!-- Selector de categoría -->
+      <div class="gen-category-btns">
+        <button class="gen-cat-btn active" data-cat="messages">💌 Mensajes de Amor</button>
+        <button class="gen-cat-btn" data-cat="quotes">✨ Frases Célebres</button>
+        <button class="gen-cat-btn" data-cat="pickup">😄 Piropos</button>
+        <button class="gen-cat-btn" data-cat="poems">🌸 Mini Poemas</button>
+      </div>
+
+      <!-- Display del mensaje -->
+      <div class="message-display">
+        <span class="message-quote-icon">"</span>
+        <div class="message-text" id="message-text">Haz clic en el botón de abajo para generar un mensaje bonito para mi Coneja... 💕</div>
+      </div>
+
+      <!-- Acciones -->
+      <div class="gen-actions">
+        <button class="btn-generate" id="generate-btn">
+          💖 Generar
+        </button>
+        <button class="btn-copy" id="copy-btn">
+          📋 Copiar
+        </button>
+        <button class="btn-outline" id="fav-btn" style="padding: 14px 24px;">
+          🌟 Guardar Favorito
+        </button>
+      </div>
+    </div>
+
+    <!-- Sección de Favoritos -->
+    <div data-aos="fade-up" data-aos-delay="200">
+      <div class="section-title">
+        <h2>💝 Tus Favoritos</h2>
+        <p>Mensajes que has guardado para recordar</p>
+      </div>
+      <div id="favorites-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem;"></div>
+      <div id="no-favorites" style="text-align:center; color: var(--text-light); padding: 2rem; font-size:1rem;">Aún no hay favoritos. ¡Guarda algunos mensajes! 💕</div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="footer-logo">💖 LoveAura</div>
+    <div class="footer-links">
+      <a href="index.html">Inicio</a> <a href="love.html">Generador</a> <a href="quiz.html">Quiz</a> <a href="calculator.html">Calculadora</a>
+    </div>
+    <p>Creado con <span class="heart">❤️</span> por <strong>CG</strong></p>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // =============================================
+    // BASE DE DATOS DE MENSAJES
+    // =============================================
+    const db = {
+      messages: [
+        "Coneja, cada vez que te veo me enamoro otra vez. Eres mi para siempre. 💕",
+        "Yaz, no eres solo mi amor, eres mi mejor amiga, mi confidente y mi mayor aventura.",
+        "Contigo, cada momento ordinario se vuelve extraordinario. Gracias por ser mi persona. 🌹",
+        "Nunca supe lo que realmente significaba el amor hasta que miré tus ojos y encontré mi mundo entero.",
+        "Coneja, eres la razón por la que sonrío al despertar y sueño dulcemente al dormir. 💖",
+        "Estar contigo se siente como por fin llegar a casa después de un largo viaje. Eres mi lugar seguro.",
+        "Mi corazón te conoció antes de que nos viéramos. Te reconoció la primera vez que te vi. ✨",
+        "Yaz, haces que incluso los días más difíciles se sientan manejables, y los días buenos se sienten absolutamente mágicos.",
+        "Si pudiera escribir una canción de amor, sería sobre cada pequeña cosa que adoro de ti. 🎵",
+        "Amarte es lo más fácil y natural que he hecho en toda mi vida. 💞",
+        "Coneja, eres mi sol en un día nublado, mi calidez en el frío, mi calma en cada tormenta.",
+        "Cada historia de amor es hermosa, pero la nuestra es mi favorita de todos los tiempos. 💝",
+        "Te elijo a ti. No solo hoy, no solo mañana, sino por todos los días que están por venir.",
+        "El mundo es un lugar más brillante porque existes en él. Y mi vida es infinitamente mejor contigo en ella.",
+        "Yaz, me enamoré desde el primer 'hola'. Y desde entonces sigo enamorado, de formas que nunca podré explicar del todo. 🌸",
+        "Coneja, eres la dueña de mi corazón y no pienso pedirla de vuelta. ❤️",
+        "Cada día a tu lado es un regalo que atesoro con toda mi alma. Te amo, Yaz. 💖",
+        "Eres mi persona favorita en todo el universo. No hay nadie como tú, Coneja. 🌟"
+      ],
+      quotes: [
+        "\"Lo mejor a lo que aferrarse en la vida es el uno al otro.\" – Audrey Hepburn 💫",
+        "\"Sabes que estás enamorado cuando no puedes dormir porque la realidad es finalmente mejor que tus sueños.\" – Dr. Seuss",
+        "\"He esperado esta oportunidad durante más de medio siglo, para repetirte una vez más mi voto de fidelidad eterna.\" – Gabriel García Márquez",
+        "\"Sean cuales sean las almas de las que estemos hechos, la suya y la mía son iguales.\" – Emily Brontë 🌹",
+        "\"Preferiría compartir una vida contigo que enfrentar todas las edades de este mundo solo.\" – Tolkien",
+        "\"En todo el mundo, no hay un corazón para mí como el tuyo. En todo el mundo, no hay amor para ti como el mío.\" – Maya Angelou 💖",
+        "\"Amar y ser amado es sentir el sol desde ambos lados.\" – David Viscott ☀️",
+        "\"El corazón quiere lo que quiere. No hay lógica en estas cosas. Conoces a alguien y te enamoras.\" – Woody Allen",
+        "\"Soy quien soy gracias a ti. Eres cada razón, cada esperanza y cada sueño que he tenido.\" – Nicholas Sparks 💕",
+        "\"El amor no se trata de cuántos días, meses o años han estado juntos. Se trata de cuánto se aman cada día.\" ✨",
+        "\"No amas a alguien por su apariencia o su ropa o su auto elegante, sino porque cantan una canción que solo tú puedes escuchar.\"",
+        "\"El mejor amor es el que despierta el alma; que nos hace alcanzar más, que enciende un fuego en nuestros corazones.\" – Nicholas Sparks 🔥",
+        "\"Coneja, eres mi inspiración y mi razón para ser mejor cada día. Te amo, Yaz.\" 💕"
+      ],
+      pickup: [
+        "¿Eres maga? Porque cada vez que te miro, todos los demás desaparecen. ✨",
+        "¿Tienes un mapa? Porque me pierdo en tus ojos. 🗺️",
+        "¿Te llamas Google? Porque tienes todo lo que he estado buscando. 💻",
+        "¿Eres una cámara? Cada vez que te veo, sonrío. 📸",
+        "¿Crees en el amor a primera vista o paso otra vez? 😏",
+        "Si fueras verdura, serías un durazno, la forma ya la tienes... ahi atras.... 💕",
+        "¿Puedo seguirte a casa? Porque mis padres siempre me dijeron que siguiera mis sueños. 🌟",
+        "¿Eres un préstamo bancario? Porque tienes mi interés. 💰",
+        "¿Tienes un lápiz? Porque quiero borrar tu pasado y escribir nuestro futuro. ✏️",
+        "Si los besos fueran copos de nieve, te enviaría una tormenta. ❄️💋",
+        "¿Eres una estrella? Porque tu belleza ilumina los rincones más oscuros de mi mundo. ⭐",
+        "¿Te duele ser tan hermosa? 💫",
+        "Coneja, ¿sabes qué tienen en común tú y un sueño? Que no quiero despertar de ti. 😍"
+      ],
+      poems: [
+        "Coneja querida,\nYaz de mi vida,\nNo hay poema que logre\ndecir cuánto te quiero. 🌹",
+        "Tu sonrisa es el amanecer\nque ilumina mi día,\nTu risa es la melodía\nque nunca se desvía. 🌅",
+        "En mil vidas diferentes\na través de mil mares,\nte encontraría siempre\ny caería de rodillas. 💫",
+        "Yaz, eres el poema\nque nunca supe escribir,\nel sueño que se hizo real,\nmi día y mi noche. ✨",
+        "Como las estrellas necesitan\nla oscuridad para brillar,\nYo te necesito a ti, Coneja,\ndonde quiera que esté. ⭐",
+        "Tu amor es el ancla\ncuando mis tormentas son fuertes,\ntu presencia, el recordatorio\nque la vida es suficiente. 🌊",
+        "Toma mi mano, Coneja,\ncaminemos juntos este camino,\nsiempre juntos,\ncompartiendo cada destino. 💕",
+        "Si fuera pintor\ntu rostro pintaría,\npues ningún lienzo captura\ntu infinita armonía. 🎨",
+        "Coneja, Yaz,\neres mi sol, mi luna,\nmi todo en este mundo,\nmi más hermosa fortuna. 🌙",
+        "Tu amor me sostiene\ncomo el aire que respiro,\nConeja, sin ti,\nsimplemente me desvivo. 💖"
+      ]
+    };
+
+    let currentCategory = 'messages';
+    let currentMessage = '';
+
+    // Botones de categoría
+    document.querySelectorAll('.gen-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.gen-cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        generateMessage();
+      });
+    });
+
+    function generateMessage() {
+      const pool = db[currentCategory];
+      let newMsg;
+      do { newMsg = pool[Math.floor(Math.random() * pool.length)]; }
+      while (newMsg === currentMessage && pool.length > 1);
+      currentMessage = newMsg;
+
+      const el = document.getElementById('message-text');
+      el.classList.add('fade-out');
+      setTimeout(() => {
+        el.innerHTML = currentMessage.replace(/\n/g, '<br>');
+        el.classList.remove('fade-out');
+        el.classList.add('fade-in');
+        setTimeout(() => el.classList.remove('fade-in'), 400);
+      }, 200);
+    }
+
+    document.getElementById('generate-btn').addEventListener('click', generateMessage);
+
+    document.getElementById('copy-btn').addEventListener('click', () => {
+      if (!currentMessage) return;
+      copyToClipboard(currentMessage.replace(/<br>/g, '\n'));
+      showCopyToast('💕 ¡Copiado al portapapeles!');
+    });
+
+    // Favoritos
+    function getFavorites() {
+      return JSON.parse(localStorage.getItem('loveaura_favorites') || '[]');
+    }
+    function saveFavorites(favs) {
+      localStorage.setItem('loveaura_favorites', JSON.stringify(favs));
+    }
+
+    document.getElementById('fav-btn').addEventListener('click', () => {
+      if (!currentMessage) return;
+      const favs = getFavorites();
+      if (favs.includes(currentMessage)) {
+        showCopyToast('✨ ¡Ya está guardado!');
+        return;
+      }
+      favs.unshift(currentMessage);
+      if (favs.length > 12) favs.pop();
+      saveFavorites(favs);
+      renderFavorites();
+      showCopyToast('🌟 ¡Guardado en favoritos!');
+    });
+
+    function renderFavorites() {
+      const favs = getFavorites();
+      const grid = document.getElementById('favorites-grid');
+      const noFav = document.getElementById('no-favorites');
+      grid.innerHTML = '';
+
+      if (favs.length === 0) {
+        noFav.style.display = 'block';
+        return;
+      }
+      noFav.style.display = 'none';
+
+      favs.forEach((msg, idx) => {
+        const card = document.createElement('div');
+        card.style.cssText = `
+          background: var(--white);
+          border: 1px solid rgba(255,77,109,0.15);
+          border-radius: var(--radius);
+          padding: 1.5rem;
+          position: relative;
+          box-shadow: 0 4px 16px rgba(255,77,109,0.07);
+          backdrop-filter: blur(8px);
+          transition: var(--transition);
+        `;
+        card.innerHTML = `
+          <p style="font-family: var(--font-fancy); font-size: 1.05rem; color: var(--text); line-height: 1.6; margin-bottom: 0.8rem;">${msg.replace(/\n/g,'<br>')}</p>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button onclick="copyFav('${idx}')" style="background:rgba(255,77,109,0.1); color:var(--primary); border:none; padding:5px 12px; border-radius:50px; font-size:0.78rem; cursor:pointer; font-family: var(--font-main);">📋 Copiar</button>
+            <button onclick="deleteFav(${idx})" style="background:rgba(231,76,60,0.1); color:#e74c3c; border:none; padding:5px 12px; border-radius:50px; font-size:0.78rem; cursor:pointer; font-family: var(--font-main);">🗑 Eliminar</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    window.copyFav = (idx) => {
+      const favs = getFavorites();
+      copyToClipboard(favs[idx]);
+      showCopyToast('💕 ¡Copiado!');
+    };
+    window.deleteFav = (idx) => {
+      const favs = getFavorites();
+      favs.splice(idx, 1);
+      saveFavorites(favs);
+      renderFavorites();
+    };
+
+    // Función para copiar (fallback)
+    function copyToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+    }
+
+    function showCopyToast(msg) {
+      const toast = document.createElement('div');
+      toast.textContent = msg;
+      toast.style.cssText = `
+        position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+        background: rgba(0,0,0,0.8); color: #fff; padding: 12px 28px;
+        border-radius: 50px; font-family: var(--font-main); font-size: 0.95rem;
+        z-index: 9999; animation: fadeInUp 0.4s ease forwards;
+        backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
+      `;
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+        toast.style.transition = '0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 2500);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      generateMessage();
+      renderFavorites();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz de Amor – LoveAura</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <h1 data-aos="fade-down">Quiz 💌</h1>
+    <p data-aos="fade-up" data-aos-delay="200">Veamos si realmente te acuerdas, amor.</p>
+  </div>
+
+  <section class="quiz-section">
+    <div class="quiz-container" data-aos="zoom-in">
+
+      <!-- Barra de progreso -->
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+
+      <!-- Área de preguntas -->
+      <div id="quiz-area">
+        <div class="quiz-question-num" id="question-num">Pregunta 1 de 10</div>
+        <div class="quiz-question" id="question-text">Cargando...</div>
+        <div class="quiz-options" id="quiz-options"></div>
+        <div class="quiz-footer">
+          <button class="btn-primary" id="next-btn" style="display:none;">Siguiente →</button>
+        </div>
+      </div>
+
+      <!-- Área de resultados -->
+      <div class="quiz-result" id="quiz-result">
+        <span class="result-emoji" id="result-emoji">💖</span>
+        <div class="result-title" id="result-title">¡Experta en Amor!</div>
+        <div class="result-score" id="result-score">10/10</div>
+        <div class="result-message" id="result-message">Estás profundamente conectada con tu lado romántico...</div>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+          <button class="btn-primary" id="restart-btn">🔄 Jugar de Nuevo</button>
+          <a href="love.html" class="btn-outline">💬 Recibir Mensaje de Amor</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">💖</div>
+    <div class="footer-links">
+      <a href="index.html">Inicio</a> <a href="quiz.html">Quiz</a> <a href="love.html">Generador</a> <a href="calculator.html">Calculadora</a>
+    </div>
+    <p>Hecho con <span class="heart">❤️</span> por <strong>CG</strong></p>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // =============================================
+    // DATOS DEL QUIZ
+    // =============================================
+    const questions = [
+      {
+        q: "¿Qué color vestías en nuestra primera cita?",
+        options: [
+          { text: "Azul", correct: false },
+          { text: "Blanco", correct: false },
+          { text: "Negro", correct: false },
+          { text: "Verde", correct: true }
+        ]
+      },
+      {
+        q: "¿Qué día es nuestro aniversario?",
+        options: [
+          { text: "20 de Noviembre", correct: false },
+          { text: "22 de Noviembre", correct: true },
+          { text: "20 de Septiembre", correct: false },
+          { text: "22 de Septiembre", correct: false }
+        ]
+      },
+      {
+        q: "¿Qué comimos la primera vez en tu casa?",
+        options: [
+          { text: "Pozole", correct: false },
+          { text: "Pancita", correct: false },
+          { text: "Carne cencebollada", correct: false },
+          { text: "Carne con papas", correct: true }
+        ]
+      },
+      {
+        q: "¿De qué artista fue la primera canción que te dediqué?",
+        options: [
+          { text: "Camilo Séptimo", correct: false },
+          { text: "Siddhartha", correct: false },
+          { text: "Young Tender", correct: false },
+          { text: "Surfistas del Sistema", correct: true }
+        ]
+      },
+      {
+        q: "¿Qué estabas haciendo cuando te dije que me gustabas?",
+        options: [
+          { text: "Imprimiendo", correct: false },
+          { text: "Recortando", correct: true },
+          { text: "Decorando", correct: false },
+          { text: "Coloreando", correct: false }
+        ]
+      },
+      {
+        q: "¿Dónde te dije por primera vez 'TE AMO'?",
+        options: [
+          { text: "En el AN1", correct: false },
+          { text: "En el AN2", correct: true },
+          { text: "En tu casa", correct: false },
+          { text: "En una cita", correct: false }
+        ]
+      },
+      {
+        q: "¿Dónde estábamos cuando escuché el apodo que te dicen en tu familia?",
+        options: [
+          { text: "En tu casa", correct: false },
+          { text: "En casa de Karo", correct: false },
+          { text: "En casa de Adri", correct: false },
+          { text: "En tu carro", correct: true }
+        ]
+      },
+      {
+        q: "En nuestra cita por los 100 días, ¿qué cosa importante pasó?",
+        options: [
+          { text: "Te presenté a mi mamá", correct: false },
+          { text: "Conocí a tu papá", correct: false },
+          { text: "Comiste con mi familia", correct: false },
+          { text: "Dormimos juntos", correct: true }
+        ]
+      },
+      {
+        q: "El día que compramos los azulitos, ¿qué comimos en tu casa?",
+        options: [
+          { text: "Pancita", correct: false },
+          { text: "Chicharrón en salsa verde", correct: true },
+          { text: "Pambazos", correct: false }
+        ]
+      },
+      {
+        q: "Te di $50 ajolopesos a cambio de ¿qué?",
+        options: [
+          { text: "Una foto para mi cartera", correct: false },
+          { text: "Una nota de voz", correct: true },
+          { text: "Que fuéramos a comer", correct: false },
+          { text: "Una liga de tu cabello", correct: false }
+        ]
+      }
+    ];
+
+    // =============================================
+    // LÓGICA DEL QUIZ
+    // =============================================
+    let currentQ = 0;
+    let score = 0;
+    let answered = false;
+
+    function renderQuestion() {
+      answered = false;
+      document.getElementById('next-btn').style.display = 'none';
+
+      const q = questions[currentQ];
+      document.getElementById('question-num').textContent = `Pregunta ${currentQ + 1} de ${questions.length}`;
+      document.getElementById('question-text').textContent = q.q;
+      document.getElementById('progress-fill').style.width = `${(currentQ / questions.length) * 100}%`;
+
+      const optionsEl = document.getElementById('quiz-options');
+      optionsEl.innerHTML = '';
+
+      const letters = ['A', 'B', 'C', 'D'];
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option';
+        btn.innerHTML = `<span class="option-icon">${letters[idx]}</span> ${opt.text}`;
+        btn.addEventListener('click', () => {
+          if (answered) return;
+          answered = true;
+          btn.classList.add('selected');
+          
+          // Sumar punto si es correcta
+          if (opt.correct) {
+            score++;
+          }
+          
+          document.getElementById('next-btn').style.display = 'inline-flex';
+
+          // Deshabilitar todas las opciones (sin mostrar cuál es la correcta)
+          optionsEl.querySelectorAll('.quiz-option').forEach(b => {
+            b.style.pointerEvents = 'none';
+            b.style.opacity = '0.6';
+          });
+          btn.style.opacity = '1';
+        });
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function showResult() {
+      document.getElementById('quiz-area').style.display = 'none';
+      const result = document.getElementById('quiz-result');
+      result.classList.add('active');
+      document.getElementById('progress-fill').style.width = '100%';
+
+      // Mostrar puntuación como X/10
+      document.getElementById('result-score').textContent = `${score}/10`;
+
+      let emoji, title, msg;
+
+      // Frases basadas en qué tanto conoce de la relación
+      if (score >= 9) {
+        emoji = '👑';
+        title = '¡REINA DE LOS RECUERDOS!';
+        msg = `¡${score}/10! No se te escapa ni un solo detalle de nuestra historia. Recuerdas cada momento especial como si fuera ayer. Eres increíble, y me encanta que guardes tan bonitos recuerdos de lo que hemos vivido juntos. Te amo con todo mi corazón. 💖`;
+      } else if (score >= 7) {
+        emoji = '🌟';
+        title = '¡CORAZÓN DE ORO!';
+        msg = `¡${score}/10! Tienes una memoria hermosa de nuestra relación. Recuerdas la mayoría de los momentos importantes, y eso demuestra lo mucho que valoras lo que compartimos. Sigue atesorando estos recuerdos, porque son el tesoro de nuestro amor. 💕`;
+      } else if (score >= 5) {
+        emoji = '💫';
+        title = '¡BUEN RECUERDO!';
+        msg = `${score}/10. Conoces bien nuestra historia, aunque algunos detalles se te han escapado. Pero no importa, lo importante es que cada día construimos nuevos recuerdos juntos. ¡Sigue llenando tu corazón de momentos bonitos a mi lado! ✨`;
+      } else if (score >= 3) {
+        emoji = '🌙';
+        title = 'CORAZÓN DISTRAÍDO';
+        msg = `${score}/10. Tal vez los detalles no son lo tuyo, pero sé que me amas con todo tu corazón. Lo que importa no es cuánto recuerdas del pasado, sino cuánto disfrutas el presente a mi lado. ¡Te amo igual y más! 💛`;
+      } else {
+        emoji = '🌱';
+        title = 'AMOR EN CONSTRUCCIÓN';
+        msg = `${score}/10. ¡Ay, amor! Parece que algunos recuerdos se han difuminado, pero no te preocupes. Nuestra historia apenas comienza y tenemos toda una vida para llenarla de momentos inolvidables. ¡Vamos a crear recuerdos nuevos y aún más bonitos! 💜`;
+      }
+
+      document.getElementById('result-emoji').textContent = emoji;
+      document.getElementById('result-title').textContent = title;
+      document.getElementById('result-message').textContent = msg;
+    }
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+      currentQ++;
+      if (currentQ >= questions.length) {
+        showResult();
+      } else {
+        renderQuestion();
+      }
+    });
+
+    document.getElementById('restart-btn').addEventListener('click', () => {
+      currentQ = 0;
+      score = 0;
+      document.getElementById('quiz-result').classList.remove('active');
+      document.getElementById('quiz-area').style.display = 'block';
+      renderQuestion();
+    });
+
+    // Iniciar
+    document.addEventListener('DOMContentLoaded', renderQuestion);
+  </script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Amor – Coneja 💕</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <h1 data-aos="fade-down">Calculadora de Amor 💯</h1>
+    <p data-aos="fade-up" data-aos-delay="200">Solo hay una compatibilidad que importa, Coneja 💕</p>
+  </div>
+
+  <section class="calculator-section">
+    <div class="calc-card" data-aos="zoom-in">
+
+      <div style="font-family: var(--font-fancy); font-size: 3rem; margin-bottom: 1rem;">🐰💖</div>
+      <h2 style="font-family: var(--font-fancy); font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem;">¿Somos compatibles?</h2>
+      <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 0.95rem;">Solo hay una respuesta correcta... ¡y ya la sabes! 💕</p>
+
+      <div class="calc-inputs">
+        <div class="calc-input-group">
+          <span class="calc-input-icon">👤</span>
+          <input type="text" id="name1" value="Carlos" maxlength="30" />
+        </div>
+
+        <div class="calc-vs">💕</div>
+
+        <div class="calc-input-group">
+          <span class="calc-input-icon">🐰</span>
+          <input type="text" id="name2" value="Coneja (Yaz)" maxlength="30" />
+        </div>
+      </div>
+
+      <button class="btn-primary" id="calc-btn" style="width: 100%; justify-content: center; font-size: 1.05rem;">
+        💖 Calcular Amor
+      </button>
+
+      <div id="calc-error" style="color:#e74c3c; font-size:0.85rem; margin-top:0.8rem; display:none;">¡Ay, Coneja! ¿Por qué quieres cambiar los nombres? 😏</div>
+
+      <!-- RESULT -->
+      <div class="calc-result" id="calc-result">
+        <div class="calc-names" id="calc-names">Carlos & Coneja (Yaz)</div>
+
+        <!-- SVG Circle Progress -->
+        <div class="circle-progress-wrapper">
+          <svg viewBox="0 0 160 160" width="160" height="160">
+            <defs>
+              <linearGradient id="calcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff4d6d"/>
+                <stop offset="100%" stop-color="#ff8fa3"/>
+              </linearGradient>
+            </defs>
+            <circle class="circle-bg" cx="80" cy="80" r="70"/>
+            <circle class="circle-fill" id="circle-fill" cx="80" cy="80" r="70"/>
+          </svg>
+          <div class="circle-text">
+            <div class="circle-percent" id="circle-percent">0%</div>
+            <div class="circle-label">Amor</div>
+          </div>
+        </div>
+
+        <div class="calc-message" id="calc-message">¡Están hechos el uno para el otro! 💕</div>
+
+        <!-- Progress bar as backup visual -->
+        <div style="margin: 1.5rem 0; background: var(--bg2); border-radius: 50px; height: 12px; overflow: hidden;">
+          <div id="progress-bar-fill" style="height:100%; width:0%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius:50px; transition: width 1.5s cubic-bezier(.4,0,.2,1);"></div>
+        </div>
+
+        <div id="love-emoji-row" style="font-size: 2rem; letter-spacing: 4px; margin: 1rem 0;"></div>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+          <button class="btn-primary" id="recalc-btn">🔄 Jugar de Nuevo</button>
+          <button class="btn-copy" id="share-calc-btn">📋 Copiar Resultado</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FUN SECTION - Personalizada -->
+  <section style="padding: 60px 2rem; max-width: 900px; margin: 0 auto; position: relative; z-index:1;">
+    <div class="section-title" data-aos="fade-up">
+      <h2>¿Por qué 100%? 🐰</h2>
+      <p>La única compatibilidad que importa, Coneja</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.2rem;" data-aos="fade-up" data-aos-delay="100">
+      <div style="background: var(--white); border-radius: var(--radius); padding: 1.5rem; text-align:center; box-shadow: 0 4px 16px rgba(255,77,109,0.07); border: 1px solid rgba(255,77,109,0.1);">
+        <div style="font-size:2.5rem; margin-bottom:0.5rem;">🐰</div>
+        <div style="font-family:var(--font-fancy); color: var(--primary); font-size:1.2rem;">Eres Mi Coneja</div>
+        <p style="font-size:0.85rem; color:var(--text-light); margin-top:0.3rem;">La única persona que hace latir mi corazón más fuerte.</p>
+      </div>
+      <div style="background: var(--white); border-radius: var(--radius); padding: 1.5rem; text-align:center; box-shadow: 0 4px 16px rgba(255,77,109,0.07); border: 1px solid rgba(255,77,109,0.1);">
+        <div style="font-size:2.5rem; margin-bottom:0.5rem;">💕</div>
+        <div style="font-family:var(--font-fancy); color: var(--primary); font-size:1.2rem;">Amor Verdadero</div>
+        <p style="font-size:0.85rem; color:var(--text-light); margin-top:0.3rem;">No necesitamos calculadora para saber que somos perfectos.</p>
+      </div>
+      <div style="background: var(--white); border-radius: var(--radius); padding: 1.5rem; text-align:center; box-shadow: 0 4px 16px rgba(255,77,109,0.07); border: 1px solid rgba(255,77,109,0.1);">
+        <div style="font-size:2.5rem; margin-bottom:0.5rem;">✨</div>
+        <div style="font-family:var(--font-fancy); color: var(--primary); font-size:1.2rem;">Para Siempre</div>
+        <p style="font-size:0.85rem; color:var(--text-light); margin-top:0.3rem;">No importa quién más intente calcular, solo tú y yo.</p>
+      </div>
+      <div style="background: var(--white); border-radius: var(--radius); padding: 1.5rem; text-align:center; box-shadow: 0 4px 16px rgba(255,77,109,0.07); border: 1px solid rgba(255,77,109,0.1);">
+        <div style="font-size:2.5rem; margin-bottom:0.5rem;">💖</div>
+        <div style="font-family:var(--font-fancy); color: var(--primary); font-size:1.2rem;">100%</div>
+        <p style="font-size:0.85rem; color:var(--text-light); margin-top:0.3rem;">Siempre 100% porque así es nuestro amor, Coneja.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">🐰💖</div>
+    <div class="footer-links">
+      <a href="index.html">Inicio</a> <a href="calculator.html">Calculadora</a> <a href="quiz.html">Quiz</a> <a href="love.html">Generador</a>
+    </div>
+    <p>Hecho con <span class="heart">❤️</span> para mi <strong>Coneja</strong></p>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // =============================================
+    // CALCULADORA DE AMOR - VERSIÓN CONEJA
+    // =============================================
+    
+    // Nombres fijos
+    const NOMBRE1 = "Carlos";
+    const NOMBRE2 = "Coneja (Yaz)";
+
+    function calculateLove(name1, name2) {
+      // SIEMPRE RETORNA 100% cuando son los nombres correctos
+      if (name1 === NOMBRE1 && name2 === NOMBRE2) {
+        return 100;
+      }
+      // Si alguien intenta cambiar los nombres, da un número aleatorio bajo
+      // para que se den cuenta que no funciona con otros nombres
+      return Math.floor(Math.random() * 30) + 10; // 10-40%
+    }
+
+    function getLoveMessage(pct) {
+      if (pct === 100) {
+        return { 
+          msg: "🐰💖 ¡100%! ¡Coneja, estamos hechos el uno para el otro! No hay duda, eres mi alma gemela. Te amo con todo mi corazón. 💕", 
+          emojis: "🐰💖✨💕❤️" 
+        };
+      }
+      return { 
+        msg: "😏 Ay, Coneja... ¿por qué quieres probar con otros nombres? Sabes que solo tú y yo tenemos 100%. ¡No hay nadie más para mí! 💖", 
+        emojis: "😏💕🐰✨💖" 
+      };
+    }
+
+    document.getElementById('calc-btn').addEventListener('click', () => {
+      let n1 = document.getElementById('name1').value.trim();
+      let n2 = document.getElementById('name2').value.trim();
+      const errEl = document.getElementById('calc-error');
+
+      // Verificar si intentaron cambiar los nombres
+      if (n1 !== NOMBRE1 || n2 !== NOMBRE2) {
+        errEl.style.display = 'block';
+        // Restaurar los nombres originales después de 2 segundos
+        setTimeout(() => {
+          document.getElementById('name1').value = NOMBRE1;
+          document.getElementById('name2').value = NOMBRE2;
+          errEl.style.display = 'none';
+        }, 3000);
+        
+        // Calcular con los nombres originales para mostrar el 100%
+        n1 = NOMBRE1;
+        n2 = NOMBRE2;
+      } else {
+        errEl.style.display = 'none';
+      }
+
+      const pct = calculateLove(n1, n2);
+      const { msg, emojis } = getLoveMessage(pct);
+
+      // Mostrar resultado
+      document.getElementById('calc-names').innerHTML = `<span>${n1}</span> & <span>${n2}</span>`;
+      document.getElementById('calc-message').textContent = msg;
+      document.getElementById('love-emoji-row').textContent = emojis;
+      document.getElementById('calc-result').classList.add('active');
+
+      // Animar círculo
+      const circumference = 2 * Math.PI * 70;
+      const offset = circumference - (pct / 100) * circumference;
+      const circle = document.getElementById('circle-fill');
+      const percentEl = document.getElementById('circle-percent');
+      const barFill = document.getElementById('progress-bar-fill');
+
+      circle.style.strokeDashoffset = circumference;
+      percentEl.textContent = '0%';
+      barFill.style.width = '0%';
+
+      setTimeout(() => {
+        circle.style.strokeDashoffset = offset;
+        barFill.style.width = pct + '%';
+        let current = 0;
+        const step = pct / 60;
+        const timer = setInterval(() => {
+          current = Math.min(current + step, pct);
+          percentEl.textContent = Math.round(current) + '%';
+          if (current >= pct) clearInterval(timer);
+        }, 25);
+      }, 100);
+
+      document.getElementById('calc-result').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    // Cuando intentan escribir en los campos, mostrar mensaje juguetón
+    document.getElementById('name1').addEventListener('focus', function() {
+      if (this.value === NOMBRE1) {
+        this.select();
+      }
+    });
+
+    document.getElementById('name2').addEventListener('focus', function() {
+      if (this.value === NOMBRE2) {
+        this.select();
+      }
+    });
+
+    document.getElementById('recalc-btn').addEventListener('click', () => {
+      document.getElementById('calc-result').classList.remove('active');
+      document.getElementById('name1').value = NOMBRE1;
+      document.getElementById('name2').value = NOMBRE2;
+      document.getElementById('calc-error').style.display = 'none';
+    });
+
+    document.getElementById('share-calc-btn').addEventListener('click', () => {
+      const text = `🐰💖 ¡100% de compatibilidad! ${NOMBRE1} y ${NOMBRE2} están hechos el uno para el otro. ¡Te amo, Coneja! 💕`;
+      copyToClipboard(text);
+      showCopyToast('💕 ¡Resultado copiado!');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') document.getElementById('calc-btn').click();
+    });
+
+    // Función copy fallback
+    function copyToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+    }
+
+    function showCopyToast(msg) {
+      const toast = document.createElement('div');
+      toast.textContent = msg;
+      toast.style.cssText = `
+        position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+        background: rgba(0,0,0,0.8); color: #fff; padding: 12px 28px;
+        border-radius: 50px; font-family: var(--font-main); font-size: 0.95rem;
+        z-index: 9999; animation: fadeInUp 0.4s ease forwards;
+        backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
+      `;
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+        toast.style.transition = '0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 2500);
+    }
+  </script>
+</body>
+</html>

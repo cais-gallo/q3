@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memories – LoveAura</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <h1 data-aos="fade-down">Special Memories 🗓️</h1>
+    <p data-aos="fade-up" data-aos-delay="200">Save your precious moments and count down to special dates</p>
+  </div>
+
+  <section class="memory-section">
+
+    <!-- Add Memory Form -->
+    <div class="memory-form-card" data-aos="fade-up">
+      <h3>✨ Add a Special Memory</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>📝 Event Name</label>
+          <input type="text" id="mem-title" placeholder="e.g. Our Anniversary..." maxlength="50" />
+        </div>
+        <div class="form-group">
+          <label>📅 Date</label>
+          <input type="date" id="mem-date" />
+        </div>
+        <div class="form-group">
+          <label>💝 Category</label>
+          <select id="mem-category">
+            <option value="anniversary">💑 Anniversary</option>
+            <option value="birthday">🎂 Birthday</option>
+            <option value="firstdate">🌹 First Date</option>
+            <option value="proposal">💍 Proposal</option>
+            <option value="milestone">🌟 Milestone</option>
+            <option value="other">✨ Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>💬 Note (optional)</label>
+          <input type="text" id="mem-note" placeholder="A special message..." maxlength="100" />
+        </div>
+      </div>
+      <button class="btn-primary" id="add-mem-btn">
+        💖 Save Memory
+      </button>
+      <div id="mem-error" style="color:#e74c3c; font-size:0.85rem; margin-top:0.8rem; display:none;">Please fill in the event name and date! 💕</div>
+    </div>
+
+    <!-- Memories Grid -->
+    <div class="section-title" data-aos="fade-up">
+      <h2>Your Precious Moments</h2>
+      <p>Every memory saved here with love</p>
+    </div>
+
+    <div id="memories-container" class="memories-grid">
+      <!-- Rendered by JS -->
+    </div>
+    <div id="no-memories" class="no-memories" style="display:none;">
+      <div style="font-size:3rem; margin-bottom:1rem;">🌸</div>
+      No memories saved yet. Add your first special date above! 💕
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="footer-logo">💖 LoveAura</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a> <a href="memory.html">Memories</a> <a href="quiz.html">Quiz</a> <a href="calculator.html">Calculator</a>
+    </div>
+    <p>Created with <span class="heart">❤️</span> by <strong>Shubham</strong></p>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // =============================================
+    // MEMORY STORAGE & LOGIC
+    // =============================================
+    const STORAGE_KEY = 'loveaura_memories';
+
+    const categoryConfig = {
+      anniversary: { emoji: '💑', label: 'Anniversary' },
+      birthday:    { emoji: '🎂', label: 'Birthday' },
+      firstdate:   { emoji: '🌹', label: 'First Date' },
+      proposal:    { emoji: '💍', label: 'Proposal' },
+      milestone:   { emoji: '🌟', label: 'Milestone' },
+      other:       { emoji: '✨', label: 'Special Event' }
+    };
+
+    function getMemories() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    }
+    function saveMemories(mems) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(mems));
+    }
+
+    function getCountdown(dateStr) {
+      const target = new Date(dateStr);
+      const now = new Date();
+
+      // Get next occurrence if date has passed
+      const targetThisYear = new Date(now.getFullYear(), target.getMonth(), target.getDate());
+      let nextDate = targetThisYear;
+      if (nextDate < now) {
+        nextDate = new Date(now.getFullYear() + 1, target.getMonth(), target.getDate());
+      }
+
+      const diff = nextDate - now;
+      if (diff <= 0) return { days: 0, hours: 0, mins: 0, secs: 0, isPast: true };
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+      return { days, hours, mins, secs, isPast: false };
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr + 'T00:00:00');
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function renderMemories() {
+      const mems = getMemories();
+      const container = document.getElementById('memories-container');
+      const noMem = document.getElementById('no-memories');
+      container.innerHTML = '';
+
+      if (mems.length === 0) {
+        noMem.style.display = 'block';
+        return;
+      }
+      noMem.style.display = 'none';
+
+      mems.forEach((mem, idx) => {
+        const cfg = categoryConfig[mem.category] || categoryConfig.other;
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.idx = idx;
+
+        card.innerHTML = `
+          <button class="delete-memory" data-idx="${idx}" title="Delete">✕</button>
+          <div class="memory-emoji">${cfg.emoji}</div>
+          <h4>${escapeHtml(mem.title)}</h4>
+          <div class="memory-date">📅 ${formatDate(mem.date)} · ${cfg.label}</div>
+          ${mem.note ? `<div class="memory-note">💬 "${escapeHtml(mem.note)}"</div>` : ''}
+          <div class="countdown-display">
+            <div class="countdown-label" id="cd-label-${idx}">Loading...</div>
+            <div class="countdown-units" id="cd-units-${idx}"></div>
+          </div>
+        `;
+
+        container.appendChild(card);
+
+        // Animate in
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, idx * 80);
+      });
+
+      // Delete handlers
+      container.querySelectorAll('.delete-memory').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const i = parseInt(btn.dataset.idx);
+          const mems = getMemories();
+          mems.splice(i, 1);
+          saveMemories(mems);
+          renderMemories();
+        });
+      });
+
+      // Start countdowns
+      updateAllCountdowns();
+    }
+
+    function updateAllCountdowns() {
+      const mems = getMemories();
+      mems.forEach((mem, idx) => {
+        const labelEl = document.getElementById(`cd-label-${idx}`);
+        const unitsEl = document.getElementById(`cd-units-${idx}`);
+        if (!labelEl || !unitsEl) return;
+
+        const cd = getCountdown(mem.date);
+        const targetDate = new Date(mem.date + 'T00:00:00');
+        const today = new Date();
+        const todayStr = today.toISOString().split('T')[0];
+
+        if (mem.date === todayStr) {
+          labelEl.textContent = '🎉 TODAY IS THE DAY!';
+          unitsEl.innerHTML = `<div style="font-size:2rem; animation: pulse 1s infinite;">🎊</div>`;
+        } else {
+          labelEl.textContent = `⏳ Countdown to next ${categoryConfig[mem.category]?.label || 'event'}`;
+          unitsEl.innerHTML = `
+            <div class="countdown-unit"><div class="countdown-num" id="cd-d-${idx}">${cd.days}</div><div class="countdown-unit-label">days</div></div>
+            <div class="countdown-unit"><div class="countdown-num" id="cd-h-${idx}">${cd.hours}</div><div class="countdown-unit-label">hrs</div></div>
+            <div class="countdown-unit"><div class="countdown-num" id="cd-m-${idx}">${cd.mins}</div><div class="countdown-unit-label">min</div></div>
+            <div class="countdown-unit"><div class="countdown-num" id="cd-s-${idx}">${cd.secs}</div><div class="countdown-unit-label">sec</div></div>
+          `;
+        }
+      });
+    }
+
+    // Live countdown every second
+    setInterval(updateAllCountdowns, 1000);
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    // Add Memory
+    document.getElementById('add-mem-btn').addEventListener('click', () => {
+      const title = document.getElementById('mem-title').value.trim();
+      const date = document.getElementById('mem-date').value;
+      const category = document.getElementById('mem-category').value;
+      const note = document.getElementById('mem-note').value.trim();
+      const errEl = document.getElementById('mem-error');
+
+      if (!title || !date) {
+        errEl.style.display = 'block';
+        setTimeout(() => errEl.style.display = 'none', 3000);
+        return;
+      }
+      errEl.style.display = 'none';
+
+      const mems = getMemories();
+      mems.unshift({ title, date, category, note, id: Date.now() });
+      saveMemories(mems);
+      renderMemories();
+
+      // Reset form
+      document.getElementById('mem-title').value = '';
+      document.getElementById('mem-date').value = '';
+      document.getElementById('mem-note').value = '';
+
+      showCopyToast('💖 Memory saved!');
+    });
+
+    // Set default date to today
+    document.addEventListener('DOMContentLoaded', () => {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('mem-date').value = today;
+      renderMemories();
+    });
+  </script>
+</body>
+</html>

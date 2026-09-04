@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuestra Galería – Coneja 💕</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐰</text></svg>">
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="page-header">
+    <h1 data-aos="fade-down">Nuestra Galería 🐰💕</h1>
+    <p data-aos="fade-up" data-aos-delay="200">Cada foto cuenta un pedazo de nuestra historia, Coneja</p>
+  </div>
+
+  <!-- GALLERY SECTION -->
+  <section class="gallery-section">
+    <!-- Filter Controls -->
+    <div class="gallery-controls" data-aos="fade-up">
+      <button class="filter-btn active" data-filter="all">Todas ❤️</button>
+      <button class="filter-btn" data-filter="momentos">Momentos ✨</button>
+      <button class="filter-btn" data-filter="especiales">Especiales 💖</button>
+      <button class="filter-btn" data-filter="recuerdos">Recuerdos 🥰</button>
+    </div>
+
+    <!-- Masonry Grid -->
+    <div class="masonry-grid" id="masonry-grid" data-aos="fade-up" data-aos-delay="100">
+      <!-- Items will be injected by JS -->
+    </div>
+  </section>
+
+  <!-- SLIDESHOW SECTION -->
+  <section class="slideshow-section">
+    <div class="section-title" data-aos="fade-up">
+      <h2>Nuestros Recuerdos en Movimiento 🎬</h2>
+      <p>Un viaje a través de nuestros momentos más bonitos</p>
+    </div>
+
+    <div class="slideshow-wrapper" data-aos="zoom-in">
+      <!-- Slides injected by JS -->
+    </div>
+
+    <div class="slideshow-controls">
+      <button class="slide-btn" id="slide-prev">‹</button>
+      <div class="slide-dots" id="slide-dots"></div>
+      <button class="slide-btn" id="slide-next">›</button>
+    </div>
+
+    <div style="text-align:center; margin-top: 1rem;">
+      <button class="btn-outline" id="auto-play-btn" style="font-size:0.9rem; padding: 10px 24px;">▶ Reproducir</button>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lb-close">✕</button>
+      <button class="lightbox-nav lightbox-prev" id="lb-prev">‹</button>
+      <button class="lightbox-nav lightbox-next" id="lb-next">›</button>
+      <img src="" alt="" class="lightbox-img" id="lb-img" />
+      <div class="lightbox-caption" id="lb-caption"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">🐰💖</div>
+    <div class="footer-links">
+      <a href="index.html">Inicio</a> <a href="about.html">Sobre Nosotros</a> <a href="gallery.html">Galería</a>
+      <a href="quiz.html">Quiz</a> <a href="love.html">Generador</a> <a href="contact.html">Para mi Coneja</a>
+    </div>
+    <p>Hecho con <span class="heart">❤️</span> para mi <strong>Coneja</strong></p>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // =============================================
+    // 📸 GALERÍA - FOTOS PERSONALIZADAS
+    // =============================================
+    // 🔴 INSTRUCCIONES:
+    // 1. Crea una carpeta llamada "img" en la raíz del proyecto
+    // 2. Sube tus fotos con los nombres: foto1.jpg, foto2.jpg, etc.
+    // 3. ¡Listo! Las descripciones ya están personalizadas
+    // =============================================
+
+    const galleryItems = [
+      // ==========================================
+      // 📸 FOTO 1 - El primer beso
+      // ==========================================
+      {
+        id: 1,
+        src: "img/foto1.jpg",
+        caption: "El día que nuestros labios se encontraron por primera vez... 💋✨",
+        category: "momentos",
+        height: 400
+      },
+      
+      // ==========================================
+      // 📸 FOTO 2 - Ella con el ramo de flores
+      // ==========================================
+      {
+        id: 2,
+        src: "img/foto2.jpg",
+        caption: "Mira qué hermosas flores... y aún así, tú eres lo más hermoso de la foto 🌸💖",
+        category: "momentos",
+        height: 500
+      },
+      
+      // ==========================================
+      // 📸 FOTO 3 - Mensaje de su mamá
+      // ==========================================
+      {
+        id: 3,
+        src: "img/foto3.jpg",
+        caption: "Cuando supe que hablabas de mí con tu mamá... mi corazón explotó de amor 💕🥹",
+        category: "especiales",
+        height: 450
+      },
+      
+      // ==========================================
+      // 📸 FOTO 4 - Habitación decorada cumpleaños
+      // ==========================================
+      {
+        id: 4,
+        src: "img/foto4.jpg",
+        caption: "Tu habitación decorada para tu cumpleaños... qué bonito es verte feliz 🎂🎈💖",
+        category: "especiales",
+        height: 600
+      },
+      
+      // ==========================================
+      // 📸 FOTO 5 - Sus ligas para el cabello
+      // ==========================================
+      {
+        id: 5,
+        src: "img/foto5.jpg",
+        caption: "Tus ligas que siempre te robaba... porque olían a ti y siempre he amado tu aroma 🥰🌸💕",
+        category: "recuerdos",
+        height: 400
+      },
+    ];
+
+    // =============================================
+    // 🖼️ IMÁGENES POR DEFECTO (Si no hay fotos)
+    // =============================================
+    function getDefaultImage(w, h, bg, textColor, emoji, text) {
+      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'>
+        <rect width='100%' height='100%' fill='#${bg}'/>
+        <text x='50%' y='42%' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='${Math.min(w,h)*0.15}' fill='#${textColor}'>${emoji}</text>
+        <text x='50%' y='62%' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='${Math.min(w,h)*0.05}' fill='#${textColor}' opacity='0.8'>${text}</text>
+        <text x='50%' y='78%' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='${Math.min(w,h)*0.035}' fill='#${textColor}' opacity='0.5'>📸 Sube tu foto a la carpeta img/</text>
+      </svg>`;
+      return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    }
+
+    // Verificar que cada imagen tenga una fuente válida
+    galleryItems.forEach(item => {
+      if (!item.src || item.src === 'img/') {
+        const colors = {
+          momentos: ['ff4d6d', 'fff', '💕'],
+          especiales: ['c9184a', 'fff', '💖'],
+          recuerdos: ['ff8fa3', 'fff', '🥰']
+        };
+        const c = colors[item.category] || ['ff4d6d', 'fff', '💕'];
+        item.src = getDefaultImage(600, item.height || 400, c[0], c[1], c[2], item.caption.substring(0, 30));
+      }
+    });
+
+    // =============================================
+    // RENDER MASONRY GRID
+    // =============================================
+    let currentFilter = 'all';
+    let currentLightboxIndex = 0;
+    let filteredItems = [...galleryItems];
+
+    function renderGallery(filter) {
+      const grid = document.getElementById('masonry-grid');
+      filteredItems = filter === 'all' ? galleryItems : galleryItems.filter(i => i.category === filter);
+      grid.innerHTML = '';
+
+      if (filteredItems.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align:center; padding: 4rem 2rem; color: var(--text-light);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">📸</div>
+            <h3 style="font-family: var(--font-fancy); color: var(--primary);">¡Aún no hay fotos en esta categoría!</h3>
+            <p>Sube tus fotos a la carpeta <strong>img/</strong> y actualiza la página 💕</p>
+          </div>
+        `;
+        return;
+      }
+
+      filteredItems.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'masonry-item';
+        div.dataset.idx = idx;
+        div.innerHTML = `
+          <img src="${item.src}" alt="${item.caption}" loading="lazy" onerror="this.src='${getDefaultImage(600, item.height || 400, 'ff4d6d', 'fff', '🐰', 'Sube tu foto')}'" />
+          <div class="masonry-overlay">
+            <p>🐰 ${item.caption}</p>
+          </div>
+        `;
+        div.addEventListener('click', () => openLightbox(idx));
+        grid.appendChild(div);
+
+        div.style.opacity = '0';
+        div.style.transform = 'translateY(20px)';
+        div.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        setTimeout(() => {
+          div.style.opacity = '1';
+          div.style.transform = 'translateY(0)';
+        }, idx * 80);
+      });
+    }
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderGallery(currentFilter);
+      });
+    });
+
+    renderGallery('all');
+
+    // =============================================
+    // LIGHTBOX
+    // =============================================
+    function openLightbox(idx) {
+      currentLightboxIndex = idx;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function updateLightbox() {
+      const item = filteredItems[currentLightboxIndex];
+      document.getElementById('lb-img').src = item.src;
+      document.getElementById('lb-img').alt = item.caption;
+      document.getElementById('lb-caption').textContent = `🐰 ${item.caption}`;
+    }
+
+    document.getElementById('lb-close').addEventListener('click', () => {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('lightbox')) {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    document.getElementById('lb-prev').addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentLightboxIndex = (currentLightboxIndex - 1 + filteredItems.length) % filteredItems.length;
+      updateLightbox();
+    });
+
+    document.getElementById('lb-next').addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentLightboxIndex = (currentLightboxIndex + 1) % filteredItems.length;
+      updateLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'ArrowLeft') document.getElementById('lb-prev').click();
+      if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
+      if (e.key === 'Escape') document.getElementById('lb-close').click();
+    });
+
+    // =============================================
+    // SLIDESHOW
+    // =============================================
+    const slides = galleryItems;
+    const slideshowWrapper = document.querySelector('.slideshow-wrapper');
+    const dotsContainer = document.getElementById('slide-dots');
+    let currentSlide = 0;
+    let autoPlayInterval = null;
+
+    slides.forEach((item, idx) => {
+      const slide = document.createElement('div');
+      slide.className = 'slide' + (idx === 0 ? ' active' : '');
+      slide.innerHTML = `
+        <img src="${item.src}" alt="${item.caption}" onerror="this.src='${getDefaultImage(800, 500, 'ff4d6d', 'fff', '🐰', 'Sube tu foto')}'" />
+        <div class="slide-caption">
+          <h3>🐰 ${item.caption}</h3>
+          <p>Categoría: ${item.category} · Haz clic para ver</p>
+        </div>
+      `;
+      slideshowWrapper.appendChild(slide);
+
+      const dot = document.createElement('div');
+      dot.className = 'slide-dot' + (idx === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goToSlide(idx));
+      dotsContainer.appendChild(dot);
+    });
+
+    function goToSlide(n) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.slide-dot').forEach(d => d.classList.remove('active'));
+      currentSlide = (n + slides.length) % slides.length;
+      document.querySelectorAll('.slide')[currentSlide].classList.add('active');
+      document.querySelectorAll('.slide-dot')[currentSlide].classList.add('active');
+    }
+
+    document.getElementById('slide-prev').addEventListener('click', () => goToSlide(currentSlide - 1));
+    document.getElementById('slide-next').addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    const autoBtn = document.getElementById('auto-play-btn');
+    autoBtn.addEventListener('click', () => {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+        autoBtn.textContent = '▶ Reproducir';
+      } else {
+        autoPlayInterval = setInterval(() => goToSlide(currentSlide + 1), 3000);
+        autoBtn.textContent = '⏸ Detener';
+      }
+    });
+  </script>
+</body>
+</html>

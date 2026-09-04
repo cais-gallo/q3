@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoveAura ❤️ by Shubham Narware</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loader">
+    <div class="loader-heart">
+      <div class="heart-beat">❤️</div>
+      <div class="loader-text">Loading <span class="brand">LoveAura</span>...</div>
+      <div class="loader-bar">
+        <div class="loader-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Hearts Background -->
+  <div id="hearts-bg"></div>
+
+  <!-- Cursor Trail -->
+  <div id="cursor-trail"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <span class="logo-heart">❤️</span>
+      <span class="logo-text">LoveAura</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#gallery" class="nav-link">Gallery</a></li>
+      <li><a href="#quiz" class="nav-link">Love Quiz</a></li>
+      <li><a href="#generator" class="nav-link">Generator</a></li>
+      <li><a href="#calculator" class="nav-link">Calculator</a></li>
+      <li><a href="#memories" class="nav-link">Memories</a></li>
+      <li><a href="#secret" class="nav-link secret-nav">💌 Secret</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button id="themeToggle" class="theme-btn" title="Toggle Theme">🌙</button>
+      <button id="musicToggle" class="music-btn" title="Toggle Music">🎵</button>
+      <button class="hamburger" id="hamburger">☰</button>
+    </div>
+  </nav>
+
+  <!-- ===== HOME SECTION ===== -->
+  <section id="home" class="section hero-section">
+    <div class="hero-content">
+      <div class="hero-badge">✨ A Digital Love Story</div>
+      <h1 class="hero-title">
+        <span class="title-line-1">Feel the</span>
+        <span class="title-line-2 gradient-text" id="typingText"></span>
+      </h1>
+      <p class="hero-subtitle">Where every heartbeat becomes a memory, and every moment turns into forever. Welcome to a
+        world crafted with love by <strong>Shubham Narware</strong> 💖</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary pulse-btn" onclick="scrollToSection('about')">Begin the Journey 💑</button>
+        <button class="btn btn-outline" onclick="scrollToSection('generator')">Generate Love 💌</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" data-target="1000">0</span><span class="stat-label">Love
+            Messages</span></div>
+        <div class="stat"><span class="stat-num" data-target="500">0</span><span class="stat-label">Happy Couples</span>
+        </div>
+        <div class="stat"><span class="stat-num" data-target="365">0</span><span class="stat-label">Days of Love</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="heart-3d">
+        <div class="orbit orbit-1">
+          <div class="orbit-dot"></div>
+        </div>
+        <div class="orbit orbit-2">
+          <div class="orbit-dot"></div>
+        </div>
+        <div class="orbit orbit-3">
+          <div class="orbit-dot"></div>
+        </div>
+        <div class="main-heart">💝</div>
+        <div class="heart-glow"></div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ===== MOOD MUSIC SYSTEM ===== -->
+  <div id="moodPanel" class="mood-panel glass-card">
+    <h3>🎶 Set the Mood</h3>
+    <div class="mood-btns">
+      <button class="mood-btn active" data-mood="romantic" onclick="setMood('romantic')">💕 Romantic</button>
+      <button class="mood-btn" data-mood="happy" onclick="setMood('happy')">❤️ Happy</button>
+      <button class="mood-btn" data-mood="sad" onclick="setMood('sad')">💔 Melancholy</button>
+    </div>
+    <div class="mood-now">♫ <span id="moodNow">Romantic Vibes</span></div>
+  </div>
+
+  <!-- ===== ABOUT SECTION ===== -->
+  <section id="about" class="section about-section">
+    <div class="section-header">
+      <div class="section-badge">💑 Our Story</div>
+      <h2 class="section-title">What is <span class="gradient-text">LoveAura?</span></h2>
+      <p class="section-desc">A universe where love speaks louder than words</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-story glass-card reveal-left">
+        <div class="story-icon">💫</div>
+        <h3>Born from a Dream</h3>
+        <p>LoveAura was born from a simple belief — that love deserves to be celebrated every single day. Not just on
+          anniversaries. Not just on Valentine's Day. But every moment you feel that warmth in your heart.</p>
+      </div>
+      <div class="about-story glass-card reveal-right" style="animation-delay:0.2s">
+        <div class="story-icon">🌹</div>
+        <h3>Crafted with Emotion</h3>
+        <p>Every pixel of LoveAura is designed to make you feel something real. The animations breathe, the colors glow,
+          and every interaction whispers a love story waiting to be told.</p>
+      </div>
+      <div class="about-story glass-card reveal-left" style="animation-delay:0.4s">
+        <div class="story-icon">✨</div>
+        <h3>For Every Couple</h3>
+        <p>Whether you're newly in love or celebrating decades together, LoveAura has a space for your story. Preserve
+          your memories, express your feelings, and create your legacy.</p>
+      </div>
+      <div class="about-story glass-card reveal-right" style="animation-delay:0.6s">
+        <div class="story-icon">🎁</div>
+        <h3>Infinite Possibilities</h3>
+        <p>From love calculators to secret letters, from memory timelines to virtual gifts — LoveAura is your complete
+          digital companion for the most beautiful journey of life.</p>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline-wrap">
+      <h3 class="timeline-title">The Story of LoveAura 💖</h3>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">💡</div>
+          <div class="timeline-content glass-card">
+            <h4>The Idea</h4>
+            <p>A dream to create something magical — a digital home for love stories</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">🎨</div>
+          <div class="timeline-content glass-card">
+            <h4>Design & Vision</h4>
+            <p>Crafting the perfect romantic palette, animations, and user journey</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">💻</div>
+          <div class="timeline-content glass-card">
+            <h4>Built with Love</h4>
+            <p>Coded line by line with emotion and devotion by Shubham Narware</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">🚀</div>
+          <div class="timeline-content glass-card">
+            <h4>LoveAura is Live</h4>
+            <p>Now available for every couple to experience the magic of love</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="creator-card glass-card reveal">
+      <div class="creator-avatar">👨‍💻</div>
+      <div class="creator-info">
+        <h3>Crafted with ❤️ by</h3>
+        <h2 class="creator-name gradient-text">Shubham Narware</h2>
+        <p>A passionate developer who believes technology can express love as beautifully as poetry. LoveAura is his
+          gift to every couple who deserves a magical digital space.</p>
+        <div class="creator-tags">
+          <span class="tag">💻 Developer</span>
+          <span class="tag">🎨 Designer</span>
+          <span class="tag">❤️ Romantic at Heart</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY SECTION ===== -->
+  <section id="gallery" class="section gallery-section">
+    <div class="section-header">
+      <div class="section-badge">🖼️ Gallery</div>
+      <h2 class="section-title">Moments of <span class="gradient-text">Love</span></h2>
+      <p class="section-desc">Click any image to experience it fully</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Generated by JS -->
+    </div>
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+      <button class="lb-close" onclick="closeLightbox()">✕</button>
+      <button class="lb-prev" onclick="lbPrev()">‹</button>
+      <button class="lb-next" onclick="lbNext()">›</button>
+      <div class="lb-content">
+        <div class="lb-img-wrap">
+          <div id="lbEmoji" class="lb-emoji"></div>
+        </div>
+        <div class="lb-caption" id="lbCaption"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LOVE QUIZ SECTION ===== -->
+  <section id="quiz" class="section quiz-section">
+    <div class="section-header">
+      <div class="section-badge">🧠 Quiz</div>
+      <h2 class="section-title">Love <span class="gradient-text">Quiz</span></h2>
+      <p class="section-desc">Discover your love language and personality</p>
+    </div>
+    <div class="quiz-container glass-card" id="quizContainer">
+      <div id="quizStart" class="quiz-screen active">
+        <div class="quiz-start-icon">💘</div>
+        <h3>Are You Ready for Love?</h3>
+        <p>Take this fun quiz to discover your love type, compatibility style, and romantic personality!</p>
+        <button class="btn btn-primary" onclick="startQuiz()">Start Quiz 💕</button>
+      </div>
+      <div id="quizQuestion" class="quiz-screen">
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-bar">
+            <div id="quizProgress" class="quiz-progress-fill"></div>
+          </div>
+          <span id="quizCount">1/8</span>
+        </div>
+        <div id="questionText" class="question-text"></div>
+        <div id="answersGrid" class="answers-grid"></div>
+      </div>
+      <div id="quizResult" class="quiz-screen">
+        <div id="resultEmoji" class="result-emoji"></div>
+        <h3 id="resultTitle"></h3>
+        <p id="resultDesc"></p>
+        <div id="resultScore" class="result-score"></div>
+        <button class="btn btn-primary" onclick="resetQuiz()">Try Again 🔄</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LOVE GENERATOR ===== -->
+  <section id="generator" class="section generator-section">
+    <div class="section-header">
+      <div class="section-badge">💌 Generator</div>
+      <h2 class="section-title">Love <span class="gradient-text">Generator</span></h2>
+      <p class="section-desc">Let your heart speak through beautiful words</p>
+    </div>
+    <div class="gen-tabs">
+      <button class="gen-tab active" onclick="switchTab('messages', this)">💬 Messages</button>
+      <button class="gen-tab" onclick="switchTab('shayari', this)">📜 Shayari</button>
+      <button class="gen-tab" onclick="switchTab('pickup', this)">😏 Pickup Lines</button>
+    </div>
+    <div class="gen-card glass-card">
+      <div id="genOutput" class="gen-output">
+        <div class="gen-quote-icon">❝</div>
+        <p id="genText">Click generate to receive a beautiful love message...</p>
+      </div>
+      <div class="gen-actions">
+        <button class="btn btn-primary" onclick="generateContent()">Generate ✨</button>
+        <button class="btn btn-outline" onclick="copyContent()">Copy 📋</button>
+        <button class="btn btn-outline" onclick="shareContent()">Share 💌</button>
+      </div>
+      <div id="copySuccess" class="copy-success">Copied to clipboard! 💕</div>
+    </div>
+  </section>
+
+  <!-- ===== LOVE CALCULATOR ===== -->
+  <section id="calculator" class="section calculator-section">
+    <div class="section-header">
+      <div class="section-badge">❤️ Calculator</div>
+      <h2 class="section-title">Love <span class="gradient-text">Calculator</span></h2>
+      <p class="section-desc">How compatible are you two?</p>
+    </div>
+    <div class="calc-card glass-card">
+      <div class="calc-inputs">
+        <div class="calc-input-wrap">
+          <label>Your Name 💁</label>
+          <input type="text" id="name1" placeholder="Enter your name..." class="love-input">
+        </div>
+        <div class="calc-heart-center">💕</div>
+        <div class="calc-input-wrap">
+          <label>Partner's Name 💁‍♀️</label>
+          <input type="text" id="name2" placeholder="Enter their name..." class="love-input">
+        </div>
+      </div>
+      <button class="btn btn-primary btn-large" onclick="calculateLove()">Calculate Love ❤️</button>
+      <div id="calcResult" class="calc-result hidden">
+        <div class="circle-progress-wrap">
+          <svg class="circle-svg" viewBox="0 0 120 120">
+            <circle class="circle-bg" cx="60" cy="60" r="50" />
+            <circle class="circle-fill" id="circleProgress" cx="60" cy="60" r="50" />
+          </svg>
+          <div class="circle-text">
+            <span id="lovePercent">0%</span>
+            <span class="circle-sub">Love</span>
+          </div>
+        </div>
+        <div id="calcMessage" class="calc-message"></div>
+        <div id="calcEmoji" class="calc-emoji"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MEMORIES SECTION ===== -->
+  <section id="memories" class="section memories-section">
+    <div class="section-header">
+      <div class="section-badge">📅 Memories</div>
+      <h2 class="section-title">Special <span class="gradient-text">Memories</span></h2>
+      <p class="section-desc">Every date that made your heart skip a beat</p>
+    </div>
+
+    <!-- Relationship Timer -->
+    <div class="rel-timer glass-card reveal">
+      <h3>💑 Relationship Timer</h3>
+      <div class="timer-inputs">
+        <label>When did your love story begin?</label>
+        <input type="date" id="loveStartDate" class="love-input" onchange="updateRelTimer()">
+      </div>
+      <div class="rel-timer-display" id="relTimerDisplay">
+        <div class="timer-unit"><span id="rtDays">0</span><small>Days</small></div>
+        <div class="timer-unit"><span id="rtHours">0</span><small>Hours</small></div>
+        <div class="timer-unit"><span id="rtMins">0</span><small>Minutes</small></div>
+        <div class="timer-unit"><span id="rtSecs">0</span><small>Seconds</small></div>
+      </div>
+      <div class="rel-message" id="relMessage">Enter your start date to see how long you've been in love ❤️</div>
+    </div>
+
+    <!-- Add Memory -->
+    <div class="memory-form glass-card reveal">
+      <h3>✨ Add a Memory</h3>
+      <div class="memory-inputs">
+        <input type="text" id="memTitle" placeholder="Memory title..." class="love-input">
+        <input type="date" id="memDate" class="love-input">
+        <textarea id="memDesc" placeholder="Write about this special moment..." class="love-textarea"></textarea>
+        <select id="memEmoji" class="love-input">
+          <option value="💖">💖 Love</option>
+          <option value="🎂">🎂 Birthday</option>
+          <option value="💑">💑 Anniversary</option>
+          <option value="🌹">🌹 Romance</option>
+          <option value="🎉">🎉 Celebration</option>
+          <option value="✈️">✈️ Travel</option>
+          <option value="🏠">🏠 Home</option>
+          <option value="🎁">🎁 Gift</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="addMemory()">Save Memory 💾</button>
+    </div>
+
+    <!-- Memories List -->
+    <div class="memories-list" id="memoriesList"></div>
+  </section>
+
+  <!-- ===== SECRET LETTER (Password Protected) ===== -->
+  <section id="secret" class="section secret-section">
+    <div class="section-header">
+      <div class="section-badge">💌 Secret</div>
+      <h2 class="section-title">Secret <span class="gradient-text">Love Letter</span></h2>
+      <p class="section-desc">Only for the eyes of the one you love</p>
+    </div>
+    <div id="secretLock" class="secret-lock glass-card">
+      <div class="lock-icon">🔐</div>
+      <h3>This letter is sealed with love</h3>
+      <p>Enter the secret password to unlock the letter</p>
+      <div class="secret-input-wrap">
+        <input type="password" id="secretPassword" placeholder="Enter secret password..." class="love-input"
+          onkeydown="if(event.key==='Enter') unlockLetter()">
+        <button class="btn btn-primary" onclick="unlockLetter()">Unlock 💌</button>
+      </div>
+      <small class="hint">💡 Hint: It's the name of the one who built this with love</small>
+      <div id="wrongPass" class="wrong-pass hidden">❌ Wrong password! Try again with love...</div>
+    </div>
+    <div id="secretLetter" class="secret-letter hidden">
+      <div class="letter-paper glass-card">
+        <div class="letter-seal">💌</div>
+        <div class="letter-content" id="letterContent">
+          <p class="letter-greeting">My Dearest,</p>
+          <p>If you're reading this, you've found your way to the most precious corner of LoveAura — and that means
+            you're someone truly special.</p>
+          <p>Love is not just a feeling. It's a choice made every single day. It's in the way someone remembers your
+            coffee order, or laughs at your worst jokes, or holds your hand when the world feels too heavy.</p>
+          <p>You deserve a love that is patient and kind. A love that shows up, stays, and never stops choosing you.</p>
+          <p>So here's a reminder, sealed with all the love in the universe: <em>You are worthy of the most beautiful
+              love story ever written.</em></p>
+          <p class="letter-sign">With infinite love,<br><strong>Shubham Narware ❤️</strong></p>
+        </div>
+      </div>
+      <button class="btn btn-outline" onclick="lockLetter()">Lock Again 🔒</button>
+    </div>
+  </section>
+
+  <!-- ===== VIRTUAL GIFTS ===== -->
+  <section id="gifts" class="section gifts-section">
+    <div class="section-header">
+      <div class="section-badge">🎁 Gifts</div>
+      <h2 class="section-title">Virtual <span class="gradient-text">Gifts</span></h2>
+      <p class="section-desc">Send love that transcends distance</p>
+    </div>
+    <div class="gifts-grid">
+      <div class="gift-item glass-card" onclick="sendGift(this, '🌹', 'A beautiful red rose for you!')">
+        <div class="gift-emoji">🌹</div>
+        <div class="gift-name">Red Rose</div>
+        <div class="gift-msg">Symbol of eternal love</div>
+        <button class="btn btn-sm btn-primary">Send 💌</button>
+      </div>
+      <div class="gift-item glass-card" onclick="sendGift(this, '💎', 'A diamond, as precious as you!')">
+        <div class="gift-emoji">💎</div>
+        <div class="gift-name">Diamond</div>
+        <div class="gift-msg">As rare and precious as you</div>
+        <button class="btn btn-sm btn-primary">Send 💌</button>
+      </div>
+      <div class="gift-item glass-card" onclick="sendGift(this, '🍫', 'Sweet chocolate for my sweetheart!')">
+        <div class="gift-emoji">🍫</div>
+        <div class="gift-name">Chocolate</div>
+        <div class="gift-msg">Sweet as your smile</div>
+        <button class="btn btn-sm btn-primary">Send 💌</button>
+      </div>
+      <div class="gift-item glass-card" onclick="sendGift(this, '💐', 'A bouquet full of love!')">
+        <div class="gift-emoji">💐</div>
+        <div class="gift-name">Bouquet</div>
+        <div class="gift-msg">Every flower, a feeling</div>
+        <button class="btn btn-sm btn-primary">Send 💌</button>
+      </div>
+      <div class="gift-item glass-card" onclick="sendGift(this, '⭐', 'I named a star after you!')">
+        <div class="gift-emoji">⭐</div>
+        <div class="gift-name">A Star</div>
+        <div class="gift-msg">Shining only for you</div>
+        <button class="btn btn-sm btn-primary">Send 💌</button>
+      </div>
+      <div class="gift-item glass-card" onclick="sendGift(this, '🎵', 'Our song, forever in my heart!')">
+        <div class="gift-emoji">🎵</div>
+        <div class="gift-name">Our Song</div>
+        <div class="gift-msg">The melody of us</div>
+        <button class="btn btn-sm btn-primary">Send 💌</button>
+      </div>
+    </div>
+    <div id="giftToast" class="gift-toast hidden"></div>
+  </section>
+
+  <!-- ===== LOVE DIARY ===== -->
+  <section id="diary" class="section diary-section">
+    <div class="section-header">
+      <div class="section-badge">📖 Diary</div>
+      <h2 class="section-title">Love <span class="gradient-text">Diary</span></h2>
+      <p class="section-desc">Your private space to pour out your heart</p>
+    </div>
+    <div class="diary-wrapper">
+      <div class="diary-book glass-card">
+        <div class="diary-header">
+          <h3>📖 My Love Diary</h3>
+          <input type="date" id="diaryDate" class="love-input diary-date" value="">
+        </div>
+        <input type="text" id="diaryTitle" placeholder="Today's story title..." class="love-input diary-title-input">
+        <textarea id="diaryEntry" placeholder="Dear diary, today something magical happened..."
+          class="love-textarea diary-textarea" rows="6"></textarea>
+        <div class="diary-mood">
+          <span>How are you feeling?</span>
+          <div class="mood-emojis">
+            <span class="mood-emoji" onclick="setDiaryMood(this, '😍')">😍</span>
+            <span class="mood-emoji" onclick="setDiaryMood(this, '🥰')">🥰</span>
+            <span class="mood-emoji" onclick="setDiaryMood(this, '😊')">😊</span>
+            <span class="mood-emoji" onclick="setDiaryMood(this, '😢')">😢</span>
+            <span class="mood-emoji" onclick="setDiaryMood(this, '💔')">💔</span>
+            <span class="mood-emoji" onclick="setDiaryMood(this, '🤩')">🤩</span>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="saveDiaryEntry()">Save Entry 💾</button>
+      </div>
+      <div class="diary-entries" id="diaryEntries"></div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section id="contact" class="section contact-section">
+    <div class="section-header">
+      <div class="section-badge">📞 Contact</div>
+      <h2 class="section-title">Send Some <span class="gradient-text">Love</span></h2>
+      <p class="section-desc">Reach out to Shubham Narware</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-info glass-card reveal-left">
+        <h3>Let's Connect 💬</h3>
+        <div class="contact-item"><span>💌</span>
+          <p>shubham.narware@love.com</p>
+        </div>
+        <div class="contact-item"><span>📍</span>
+          <p>India 🇮🇳</p>
+        </div>
+        <div class="contact-item"><span>💖</span>
+          <p>Made with love, for love</p>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-btn" title="GitHub">👨‍💻</a>
+          <a href="#" class="social-btn" title="Instagram">📸</a>
+          <a href="#" class="social-btn" title="Twitter">🐦</a>
+          <a href="#" class="social-btn" title="LinkedIn">💼</a>
+        </div>
+      </div>
+      <div class="contact-form glass-card reveal-right">
+        <h3>Send a Message 💬</h3>
+        <div class="form-group">
+          <input type="text" id="contactName" placeholder="Your name..." class="love-input" required>
+          <div class="input-line"></div>
+        </div>
+        <div class="form-group">
+          <input type="email" id="contactEmail" placeholder="Your email..." class="love-input" required>
+          <div class="input-line"></div>
+        </div>
+        <div class="form-group">
+          <textarea id="contactMsg" placeholder="Your message of love..." class="love-textarea" rows="4"
+            required></textarea>
+          <div class="input-line"></div>
+        </div>
+        <button class="btn btn-primary btn-large" onclick="submitContact()">Send Message 💌</button>
+        <div id="contactSuccess" class="contact-success hidden">
+          <span>💖</span>
+          <p>Message sent with love! Thank you!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-hearts" id="footerHearts"></div>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <span class="logo-heart">❤️</span>
+        <span class="logo-text">LoveAura</span>
+      </div>
+      <p class="footer-tagline">Built with every heartbeat by <strong>Shubham Narware</strong></p>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <p class="footer-copy">© 2024 LoveAura by Shubham Narware. All rights reserved. Made with ❤️ in India 🇮🇳</p>
+      <p class="easter-hint" id="easterHint">🥚 Psst... try clicking the footer logo 7 times...</p>
+    </div>
+  </footer>
+
+  <!-- Easter Egg Modal -->
+  <div id="easterEgg" class="easter-egg-modal hidden">
+    <div class="easter-content glass-card">
+      <div class="easter-emoji">🎉</div>
+      <h3>You found the Easter Egg! 🥚</h3>
+      <p>You have the curiosity of a true romantic explorer! Here's a special message just for you:</p>
+      <blockquote>"The best love is the kind that awakens the soul and makes us reach for more, that plants a fire in
+        our hearts and brings peace to our minds."</blockquote>
+      <p>— Shubham Narware, with love 💖</p>
+      <button class="btn btn-primary" onclick="closeEasterEgg()">Close 💫</button>
+    </div>
+  </div>
+
+  <!-- Gift Burst Effect -->
+  <div id="giftBurst" class="gift-burst hidden"></div>
+
+  <audio id="bgMusic" loop>
+    <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=" type="audio/wav">
+  </audio>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
