@@ -1,61 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memories – LoveAura</title>
+  <title>Nuestros Recuerdos – Coneja 💕</title>
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐰</text></svg>">
 </head>
 <body>
 
   <div id="nav-placeholder"></div>
 
   <div class="page-header">
-    <h1 data-aos="fade-down">Special Memories 🗓️</h1>
-    <p data-aos="fade-up" data-aos-delay="200">Save your precious moments and count down to special dates</p>
+    <h1 data-aos="fade-down">Nuestros Recuerdos 🗓️🐰</h1>
+    <p data-aos="fade-up" data-aos-delay="200">Cada fecha especial que hemos compartido, Coneja</p>
   </div>
 
   <section class="memory-section">
 
     <!-- Add Memory Form -->
     <div class="memory-form-card" data-aos="fade-up">
-      <h3>✨ Add a Special Memory</h3>
+      <h3>✨ Agrega un Recuerdo Especial</h3>
       <div class="form-grid">
         <div class="form-group">
-          <label>📝 Event Name</label>
-          <input type="text" id="mem-title" placeholder="e.g. Our Anniversary..." maxlength="50" />
+          <label>📝 Nombre del Evento</label>
+          <input type="text" id="mem-title" placeholder="Ej. Nuestro Aniversario..." maxlength="50" />
         </div>
         <div class="form-group">
-          <label>📅 Date</label>
+          <label>📅 Fecha</label>
           <input type="date" id="mem-date" />
         </div>
         <div class="form-group">
-          <label>💝 Category</label>
+          <label>💝 Categoría</label>
           <select id="mem-category">
-            <option value="anniversary">💑 Anniversary</option>
-            <option value="birthday">🎂 Birthday</option>
-            <option value="firstdate">🌹 First Date</option>
-            <option value="proposal">💍 Proposal</option>
-            <option value="milestone">🌟 Milestone</option>
-            <option value="other">✨ Other</option>
+            <option value="anniversary">💑 Aniversario</option>
+            <option value="birthday">🎂 Cumpleaños</option>
+            <option value="firstdate">🌹 Primera Cita</option>
+            <option value="firstkiss">💋 Primer Beso</option>
+            <option value="iloveyou">💕 Te Amo</option>
+            <option value="milestone">🌟 Logro</option>
+            <option value="other">✨ Otro</option>
           </select>
         </div>
         <div class="form-group">
-          <label>💬 Note (optional)</label>
-          <input type="text" id="mem-note" placeholder="A special message..." maxlength="100" />
+          <label>💬 Nota (opcional)</label>
+          <input type="text" id="mem-note" placeholder="Un mensaje especial..." maxlength="100" />
         </div>
       </div>
       <button class="btn-primary" id="add-mem-btn">
-        💖 Save Memory
+        💖 Guardar Recuerdo
       </button>
-      <div id="mem-error" style="color:#e74c3c; font-size:0.85rem; margin-top:0.8rem; display:none;">Please fill in the event name and date! 💕</div>
+      <div id="mem-error" style="color:#e74c3c; font-size:0.85rem; margin-top:0.8rem; display:none;">¡Por favor completa el nombre y la fecha! 💕</div>
     </div>
 
     <!-- Memories Grid -->
     <div class="section-title" data-aos="fade-up">
-      <h2>Your Precious Moments</h2>
-      <p>Every memory saved here with love</p>
+      <h2>Tus Momentos Preciosos</h2>
+      <p>Cada recuerdo guardado aquí con amor</p>
     </div>
 
     <div id="memories-container" class="memories-grid">
@@ -63,48 +64,99 @@
     </div>
     <div id="no-memories" class="no-memories" style="display:none;">
       <div style="font-size:3rem; margin-bottom:1rem;">🌸</div>
-      No memories saved yet. Add your first special date above! 💕
+      Aún no hay recuerdos guardados. ¡Agrega tu primera fecha especial arriba! 💕
     </div>
 
   </section>
 
   <footer>
-    <div class="footer-logo">💖 LoveAura</div>
+    <div class="footer-logo">🐰💖</div>
     <div class="footer-links">
-      <a href="index.html">Home</a> <a href="memory.html">Memories</a> <a href="quiz.html">Quiz</a> <a href="calculator.html">Calculator</a>
+      <a href="index.html">Inicio</a> <a href="memory.html">Recuerdos</a> <a href="quiz.html">Quiz</a> <a href="calculator.html">Calculadora</a>
     </div>
-    <p>Created with <span class="heart">❤️</span> by <strong>Shubham</strong></p>
+    <p>Hecho con <span class="heart">❤️</span> para mi <strong>Coneja</strong></p>
   </footer>
 
   <script src="js/nav.js"></script>
   <script src="js/main.js"></script>
   <script>
     // =============================================
-    // MEMORY STORAGE & LOGIC
+    // RECUERDOS - CONFIGURACIÓN PERSONALIZADA
     // =============================================
-    const STORAGE_KEY = 'loveaura_memories';
+    const STORAGE_KEY = 'conejita_memories';
 
+    // =============================================
+    // 📅 FECHAS PRECARGADAS (Ya están guardadas)
+    // =============================================
+    const DEFAULT_MEMORIES = [
+      {
+        title: "🎂 Cumpleaños de mi Coneja",
+        date: "2025-03-27",
+        category: "birthday",
+        note: "El día que nació la persona más especial de mi vida. Te amo, Coneja 💕"
+      },
+      {
+        title: "🎂 Mi Cumpleaños",
+        date: "2025-07-25",
+        category: "birthday",
+        note: "El día que cumplí años y tú estabas a mi lado 🥰"
+      },
+      {
+        title: "🌹 Nuestra Primera Cita",
+        date: "2025-09-20",
+        category: "firstdate",
+        note: "El día que todo comenzó... No sabía que ese día conocería al amor de mi vida 💖"
+      },
+      {
+        title: "💋 Nuestro Primer Beso",
+        date: "2025-10-27",
+        category: "firstkiss",
+        note: "El día que nuestros labios se encontraron por primera vez. Magia pura ✨"
+      },
+      {
+        title: "💕 Primer 'Te Amo'",
+        date: "2025-11-27",
+        category: "iloveyou",
+        note: "~ Fecha aproximada ~ El día que supe que no podía guardar más lo que sentía por ti 💖"
+      }
+    ];
+
+    // =============================================
+    // CATEGORÍAS
+    // =============================================
     const categoryConfig = {
-      anniversary: { emoji: '💑', label: 'Anniversary' },
-      birthday:    { emoji: '🎂', label: 'Birthday' },
-      firstdate:   { emoji: '🌹', label: 'First Date' },
-      proposal:    { emoji: '💍', label: 'Proposal' },
-      milestone:   { emoji: '🌟', label: 'Milestone' },
-      other:       { emoji: '✨', label: 'Special Event' }
+      anniversary: { emoji: '💑', label: 'Aniversario' },
+      birthday:    { emoji: '🎂', label: 'Cumpleaños' },
+      firstdate:   { emoji: '🌹', label: 'Primera Cita' },
+      firstkiss:   { emoji: '💋', label: 'Primer Beso' },
+      iloveyou:    { emoji: '💕', label: 'Te Amo' },
+      milestone:   { emoji: '🌟', label: 'Logro' },
+      other:       { emoji: '✨', label: 'Evento Especial' }
     };
 
+    // =============================================
+    // FUNCIONES
+    // =============================================
     function getMemories() {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || [];
     }
+
     function saveMemories(mems) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(mems));
+    }
+
+    // Inicializar con fechas precargadas si no hay nada
+    function initMemories() {
+      const existing = getMemories();
+      if (existing.length === 0) {
+        saveMemories(DEFAULT_MEMORIES);
+      }
     }
 
     function getCountdown(dateStr) {
       const target = new Date(dateStr);
       const now = new Date();
 
-      // Get next occurrence if date has passed
       const targetThisYear = new Date(now.getFullYear(), target.getMonth(), target.getDate());
       let nextDate = targetThisYear;
       if (nextDate < now) {
@@ -123,7 +175,13 @@
 
     function formatDate(dateStr) {
       const d = new Date(dateStr + 'T00:00:00');
-      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      return d.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
     }
 
     function renderMemories() {
@@ -145,20 +203,19 @@
         card.dataset.idx = idx;
 
         card.innerHTML = `
-          <button class="delete-memory" data-idx="${idx}" title="Delete">✕</button>
+          <button class="delete-memory" data-idx="${idx}" title="Eliminar">✕</button>
           <div class="memory-emoji">${cfg.emoji}</div>
           <h4>${escapeHtml(mem.title)}</h4>
           <div class="memory-date">📅 ${formatDate(mem.date)} · ${cfg.label}</div>
           ${mem.note ? `<div class="memory-note">💬 "${escapeHtml(mem.note)}"</div>` : ''}
           <div class="countdown-display">
-            <div class="countdown-label" id="cd-label-${idx}">Loading...</div>
+            <div class="countdown-label" id="cd-label-${idx}">Cargando...</div>
             <div class="countdown-units" id="cd-units-${idx}"></div>
           </div>
         `;
 
         container.appendChild(card);
 
-        // Animate in
         card.style.opacity = '0';
         card.style.transform = 'translateY(20px)';
         setTimeout(() => {
@@ -168,7 +225,7 @@
         }, idx * 80);
       });
 
-      // Delete handlers
+      // Eliminar recuerdos
       container.querySelectorAll('.delete-memory').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -177,10 +234,10 @@
           mems.splice(i, 1);
           saveMemories(mems);
           renderMemories();
+          showCopyToast('🗑️ Recuerdo eliminado');
         });
       });
 
-      // Start countdowns
       updateAllCountdowns();
     }
 
@@ -192,35 +249,32 @@
         if (!labelEl || !unitsEl) return;
 
         const cd = getCountdown(mem.date);
-        const targetDate = new Date(mem.date + 'T00:00:00');
         const today = new Date();
         const todayStr = today.toISOString().split('T')[0];
 
         if (mem.date === todayStr) {
-          labelEl.textContent = '🎉 TODAY IS THE DAY!';
+          labelEl.textContent = '🎉 ¡HOY ES EL DÍA!';
           unitsEl.innerHTML = `<div style="font-size:2rem; animation: pulse 1s infinite;">🎊</div>`;
+        } else if (cd.isPast) {
+          labelEl.textContent = `📅 ${formatDate(mem.date)} · ¡Ya pasó!`;
+          unitsEl.innerHTML = `<div style="font-size:1.2rem; color: var(--text-light);">💕 Recuerdo especial</div>`;
         } else {
-          labelEl.textContent = `⏳ Countdown to next ${categoryConfig[mem.category]?.label || 'event'}`;
+          const catLabel = categoryConfig[mem.category]?.label || 'evento';
+          labelEl.textContent = `⏳ Faltan para ${catLabel}`;
           unitsEl.innerHTML = `
-            <div class="countdown-unit"><div class="countdown-num" id="cd-d-${idx}">${cd.days}</div><div class="countdown-unit-label">days</div></div>
-            <div class="countdown-unit"><div class="countdown-num" id="cd-h-${idx}">${cd.hours}</div><div class="countdown-unit-label">hrs</div></div>
-            <div class="countdown-unit"><div class="countdown-num" id="cd-m-${idx}">${cd.mins}</div><div class="countdown-unit-label">min</div></div>
-            <div class="countdown-unit"><div class="countdown-num" id="cd-s-${idx}">${cd.secs}</div><div class="countdown-unit-label">sec</div></div>
+            <div class="countdown-unit"><div class="countdown-num">${cd.days}</div><div class="countdown-unit-label">días</div></div>
+            <div class="countdown-unit"><div class="countdown-num">${cd.hours}</div><div class="countdown-unit-label">horas</div></div>
+            <div class="countdown-unit"><div class="countdown-num">${cd.mins}</div><div class="countdown-unit-label">min</div></div>
+            <div class="countdown-unit"><div class="countdown-num">${cd.secs}</div><div class="countdown-unit-label">seg</div></div>
           `;
         }
       });
     }
 
-    // Live countdown every second
+    // Actualizar cuenta regresiva cada segundo
     setInterval(updateAllCountdowns, 1000);
 
-    function escapeHtml(str) {
-      const div = document.createElement('div');
-      div.textContent = str;
-      return div.innerHTML;
-    }
-
-    // Add Memory
+    // Agregar recuerdo
     document.getElementById('add-mem-btn').addEventListener('click', () => {
       const title = document.getElementById('mem-title').value.trim();
       const date = document.getElementById('mem-date').value;
@@ -240,16 +294,16 @@
       saveMemories(mems);
       renderMemories();
 
-      // Reset form
       document.getElementById('mem-title').value = '';
       document.getElementById('mem-date').value = '';
       document.getElementById('mem-note').value = '';
 
-      showCopyToast('💖 Memory saved!');
+      showCopyToast('💖 ¡Recuerdo guardado!');
     });
 
-    // Set default date to today
+    // Inicializar
     document.addEventListener('DOMContentLoaded', () => {
+      initMemories();
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('mem-date').value = today;
       renderMemories();
