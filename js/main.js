@@ -96,60 +96,85 @@ function initHeartsBackground() {
 }
 
 // =============================================
-// MÚSICA DE FONDO
+// 🎵 MÚSICA DE FONDO - ARCHIVO MP3
 // =============================================
 function initMusic() {
   const btn = document.getElementById('music-btn');
-  if (!btn) return;
-
-  let audioCtx = null;
+  
+  // Crear el elemento de audio
+  const audio = new Audio('music/m.mp3');
+  audio.loop = true; // Reproducir en bucle
+  audio.volume = 0.5; // Volumen al 50% (ajusta si quieres)
+  
   let isPlaying = false;
-  let intervalId = null;
 
-  // Melodía suave (frecuencias en Hz)
-  const melody = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
-
-  function playNote(freq, when, duration) {
-    if (!audioCtx) return;
-    const osc = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-    osc.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, when);
-    gainNode.gain.setValueAtTime(0, when);
-    gainNode.gain.linearRampToValueAtTime(0.04, when + 0.05);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, when + duration);
-    osc.start(when);
-    osc.stop(when + duration + 0.1);
-  }
-
-  function playMelody() {
-    if (!audioCtx) return;
-    let noteIndex = 0;
-    intervalId = setInterval(() => {
-      if (!isPlaying) return;
-      const now = audioCtx.currentTime;
-      playNote(melody[noteIndex % melody.length], now, 1.2);
-      playNote(melody[noteIndex % melody.length] * 1.5, now, 1.0);
-      noteIndex++;
-    }, 1200);
-  }
-
-  btn.addEventListener('click', () => {
-    if (!isPlaying) {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // Intentar reproducir automáticamente al cargar
+  function tryAutoPlay() {
+    audio.play().then(() => {
       isPlaying = true;
-      btn.textContent = '⏸';
-      btn.title = 'Pausar música';
-      playMelody();
-    } else {
-      isPlaying = false;
-      btn.textContent = '🎵';
-      btn.title = 'Reproducir música';
-      clearInterval(intervalId);
+      if (btn) {
+        btn.textContent = '⏸';
+        btn.title = 'Pausar música';
+      }
+    }).catch(() => {
+      // El navegador bloqueó la reproducción automática
+      // El usuario tendrá que hacer clic en el botón
+      if (btn) {
+        btn.textContent = '🎵';
+        btn.title = 'Reproducir música';
+      }
+    });
+  }
+
+  // Si hay botón, configurar evento
+  if (btn) {
+    btn.addEventListener('click', () => {
+      if (isPlaying) {
+        audio.pause();
+        isPlaying = false;
+        btn.textContent = '🎵';
+        btn.title = 'Reproducir música';
+      } else {
+        audio.play().then(() => {
+          isPlaying = true;
+          btn.textContent = '⏸';
+          btn.title = 'Pausar música';
+        }).catch(err => {
+          console.log('Error al reproducir:', err);
+        });
+      }
+    });
+
+    // Actualizar estado del botón cuando la música termina (por si acaso)
+    audio.addEventListener('ended', () => {
+      // Como está en loop, no debería terminar, pero por si acaso
+      if (btn && isPlaying) {
+        btn.textContent = '🎵';
+        btn.title = 'Reproducir música';
+        isPlaying = false;
+      }
+    });
+  }
+
+  // Intentar auto-reproducción después de un pequeño retraso
+  // (algunos navegadores permiten auto-play después de la interacción del usuario)
+  setTimeout(tryAutoPlay, 500);
+
+  // También intentar cuando el usuario hace clic en cualquier parte (para navegadores)
+  document.addEventListener('click', () => {
+    if (!isPlaying && audio.paused) {
+      audio.play().then(() => {
+        isPlaying = true;
+        if (btn) {
+          btn.textContent = '⏸';
+          btn.title = 'Pausar música';
+        }
+      }).catch(() => {});
     }
-  });
+  }, { once: true }); // Solo una vez
+
+  // Guardar referencia al audio por si se necesita
+  window.__backgroundMusic = audio;
 }
 
 // =============================================
